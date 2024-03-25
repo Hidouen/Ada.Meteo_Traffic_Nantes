@@ -39,8 +39,6 @@ async function callData() {
     for (let i = 0; i < 844; i += 100) {
         await getData(i);
     }
-    console.log(dataFromApi);
-    console.log(colorsCount);
     if (colorsCount.manquant > 0) {
         document.getElementById("manquant").innerText = colorsCount.manquant + " troncon(s) sans retour d'informations";
     }
