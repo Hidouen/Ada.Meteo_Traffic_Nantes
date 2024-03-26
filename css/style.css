@@ -12,6 +12,10 @@ h2 {
     font-size: 2em;
 }
 
+.container {
+  text-align: center;
+}
+
 .iframe-container {
     display: flex;
     justify-content: center;
