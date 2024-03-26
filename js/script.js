@@ -1,13 +1,21 @@
-let colorsCount = {
-    manquant : 0,
+let dataCount = { // stock data from our calculations
     fluide : 0,
     dense : 0,
     saturated : 0,
-    blocked : 0
+    blocked : 0,
+    manquant : 0,
+    fluideDistance : 0,
+    denseDistance : 0,
+    saturatedDistance : 0,
+    blockedDistance : 0,
+    manquantDistance : 0
 };
 
-let dataFromApi = [];
+let dataFromApi = []; // stock data from API
 
+/*
+** GET data from API and calculate
+*/
 async function getData(count) {
     try {
         const res = await fetch(`https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_fluidite-axes-routiers-nantes-metropole/records?offset=${count}&limit=100`);
@@ -15,19 +23,24 @@ async function getData(count) {
         dataFromApi.push(data.results);
         for (const record of data.results) {
             if (parseInt(record.couleur_tp) < 3) {
-                colorsCount.manquant++;
+                dataCount.manquant++;
+                dataCount.manquantDistance += record.cha_long;
             }
             else if (parseInt(record.couleur_tp) === 3) {
-                colorsCount.fluide++;
+                dataCount.fluide++;
+                dataCount.fluideDistance += record.cha_long;
             }
             else if (parseInt(record.couleur_tp) === 4) {
-                colorsCount.dense++;
+                dataCount.dense++;
+                dataCount.denseDistance += record.cha_long;
             }
             else if (parseInt(record.couleur_tp) === 5) {
-                colorsCount.saturated++;
+                dataCount.saturated++;
+                dataCount.saturatedDistance += record.cha_long;
             }
             else {
-                colorsCount.blocked++;
+                dataCount.blocked++;
+                dataCount.blockedDistance += record.cha_long;
             }
         }
     } catch (error) {
@@ -35,25 +48,35 @@ async function getData(count) {
     }
 }
 
-async function callData() {
-    for (let i = 0; i < 844; i += 100) {
-        await getData(i);
+/*
+** Put our calculated data in HTML
+*/
+function drawData() {
+    if (dataCount.manquant > 0) {
+        document.getElementById("manquant").innerText = dataCount.manquant + " route(s) sans retour d'informations";
     }
-    if (colorsCount.manquant > 0) {
-        document.getElementById("manquant").innerText = colorsCount.manquant + " troncon(s) sans retour d'informations";
+    if (dataCount.fluide > 0) {
+        document.getElementById("fluide").innerText = dataCount.fluide + " route(s) fluide(s)";
     }
-    if (colorsCount.fluide > 0) {
-        document.getElementById("fluide").innerText = colorsCount.fluide + " troncon(s) fluide(s)";
+    if (dataCount.dense > 0) {
+        document.getElementById("dense").innerText = dataCount.dense + " route(s) dense(s)";
     }
-    if (colorsCount.dense > 0) {
-        document.getElementById("dense").innerText = colorsCount.dense + " troncon(s) dense(s)";
+    if (dataCount.saturated > 0) {
+        document.getElementById("sature").innerText = dataCount.saturated + " route(s) sature(s)";
     }
-    if (colorsCount.saturated > 0) {
-        document.getElementById("sature").innerText = colorsCount.saturated + " troncon(s) sature(s)";
-    }
-    if (colorsCount.blocked > 0) {
-        document.getElementById("bloque").innerText = colorsCount.blocked + " troncon(s) bloque(s)";
+    if (dataCount.blocked > 0) {
+        document.getElementById("bloque").innerText = dataCount.blocked + " route(s) bloque(s)";
     }
 }
 
-callData();
+/*
+** Main function to manage operations
+*/
+async function manageData() {
+    for (let i = 0; i < 844; i += 100) { // API allows 100 lines max per request
+        await getData(i);
+    }
+    drawData();
+}
+
+manageData(); // launch operations
