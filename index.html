@@ -11,35 +11,38 @@
         en ce moment ?</h1>
         
         <main>
-        <div class="container">
-            <p class="smiley" id="smileyFluide">&#128515;</p>
-            <p id="fluide" style="display:none;"></p>
+            <img id="car" class="car" src="images/car.png" alt="photo de voiture">
 
-            <p class="smiley" id="smileyDense">&#128533;</p>
-            <p id="dense" style="display:none;"></p>
-            
-            <p class="smiley" id="smileySature">&#128544;</p>
-            <p id="sature" style="display:none;"></p>
+            <div class="information">
+                <div class="container">
+                    <p class="smiley" id="smileyFluide">&#128515;</p>
+                    <p id="fluide" style="display:none;"></p>
 
-            <p class="smiley" id="smileyBloque">&#128545;</p>
-            <p id="bloque" style="display:none;"></p>
+                    <p class="smiley" id="smileyDense">&#128533;</p>
+                    <p id="dense" style="display:none;"></p>
+                    
+                    <p class="smiley" id="smileySature">&#128544;</p>
+                    <p id="sature" style="display:none;"></p>
 
-            <p class="smiley" id="smileyManquant">&#10068;</p>
-            <p id="manquant" style="display:none;"></p>
-        </div>
+                    <p class="smiley" id="smileyBloque">&#128545;</p>
+                    <p id="bloque" style="display:none;"></p>
+
+                    <p class="smiley" id="smileyManquant">&#10068;</p>
+                    <p id="manquant" style="display:none;"></p>
+                </div>
 
         
-        <div class="map-chart">
-            <div class="iframe-container">
-                <iframe src="https://data.nantesmetropole.fr/explore/embed/dataset/244400404_fluidite-axes-routiers-nantes-metropole/custom/?&static=false&datasetcard=false"></iframe>
-            </div>
+                <div class="map-chart">
+                    <div class="iframe-container">
+                        <iframe src="https://data.nantesmetropole.fr/explore/embed/dataset/244400404_fluidite-axes-routiers-nantes-metropole/custom/?&static=false&datasetcard=false"></iframe>
+                    </div>
+                    
             
-            
-            <div class="chart-container">
-                <canvas id="pieCanvas" aria-label="chart" role="img"></canvas>
-            </div>
-        </div>
-            
+                    <div class="chart-container">
+                        <canvas id="pieCanvas" aria-label="chart" role="img"></canvas>
+                    </div>
+                </div>
+            </div>    
         </main>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>

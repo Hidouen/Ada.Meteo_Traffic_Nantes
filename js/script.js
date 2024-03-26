@@ -94,15 +94,19 @@ async function manageData() {
 
 manageData(); // launch operations
 
+// let trou;
+
 function toggleText(elemId) {
     var text = document.getElementById(elemId);
     if (text.style.display === "none") {
       text.style.display = "block";
+    //   trou = document.getElementById("car");
+    //   trou.style.opacity = 0.50;
     } else {
       text.style.display = "none";
     }
   }
-  
+
   document.getElementById("smileyFluide").addEventListener("click", function() {
     toggleText("fluide")
   });
