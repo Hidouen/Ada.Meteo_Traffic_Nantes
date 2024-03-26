@@ -53,10 +53,10 @@ async function getData(count) {
 */
 function drawData() {
     if (dataCount.manquant > 0) {
-        document.getElementById("manquant").innerText = dataCount.manquant + " route(s) sans retour d'informations";
+        document.getElementById("manquant").innerText = dataCount.manquant + " routes sans retour d'informations";
     }
     if (dataCount.fluide > 0) {
-        document.getElementById("fluide").innerText = dataCount.fluide + " route(s) fluide(s)";
+        document.getElementById("fluide").innerText = dataCount.fluide + " routes fluide(s)";
     }
     if (dataCount.dense > 0) {
         document.getElementById("dense").innerText = dataCount.dense + " route(s) dense(s)";
@@ -67,6 +67,19 @@ function drawData() {
     if (dataCount.blocked > 0) {
         document.getElementById("bloque").innerText = dataCount.blocked + " route(s) bloque(s)";
     }
+    
+    const pieCanvas = document.getElementById("pieCanvas")
+
+    const pieChart = new Chart (pieCanvas, {
+    type: "pie",
+    data: {
+        labels: ["Fluide", "Dense", "Saturé", "Bloqué", "Indéfini"],
+        datasets: [{
+            data: [dataCount.fluideDistance, dataCount.denseDistance, dataCount.saturatedDistance, dataCount.blockedDistance, dataCount.manquantDistance],
+            backgroundColor: ["rgb(85, 235, 98)", "yellow", "orange", "red", "grey"]
+            }]
+        }
+    })
 }
 
 /*
