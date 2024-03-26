@@ -52,9 +52,6 @@ async function getData(count) {
 ** Put our calculated data in HTML
 */
 function drawData() {
-    if (dataCount.manquant > 0) {
-        document.getElementById("manquant").innerText = dataCount.manquant + " routes sans retour d'informations";
-    }
     if (dataCount.fluide > 0) {
         document.getElementById("fluide").innerText = dataCount.fluide + " routes fluide(s)";
     }
@@ -66,6 +63,9 @@ function drawData() {
     }
     if (dataCount.blocked > 0) {
         document.getElementById("bloque").innerText = dataCount.blocked + " route(s) bloque(s)";
+    }
+    if (dataCount.manquant > 0) {
+        document.getElementById("manquant").innerText = dataCount.manquant + " routes sans retour d'informations";
     }
     
     const pieCanvas = document.getElementById("pieCanvas")
@@ -93,3 +93,28 @@ async function manageData() {
 }
 
 manageData(); // launch operations
+
+function toggleText(elemId) {
+    var text = document.getElementById(elemId);
+    if (text.style.display === "none") {
+      text.style.display = "block";
+    } else {
+      text.style.display = "none";
+    }
+  }
+  
+  document.getElementById("smileyFluide").addEventListener("click", function() {
+    toggleText("fluide")
+  });
+  document.getElementById("smileyDense").addEventListener("click", function() {
+    toggleText("dense")
+  });
+  document.getElementById("smileySature").addEventListener("click", function() {
+    toggleText("sature")
+  });
+  document.getElementById("smileyBloque").addEventListener("click", function() {
+    toggleText("bloque")
+  });
+  document.getElementById("smileyManquant").addEventListener("click", function() {
+    toggleText("manquant")
+  });

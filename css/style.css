@@ -1,9 +1,21 @@
+main {
+  position: relative;
+  z-index: 1;
+  margin-top: 300px;
+}
+
 h1 {
   text-align: center;
   font-family: 'Courier New', Courier, monospace;
   font-size: 4em;
   letter-spacing: 2px;
   line-height: 1.5;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgb(233, 188, 188);
+  z-index: 2;
+  margin-bottom: 100px;
 }
 
 h2 {
@@ -22,8 +34,8 @@ h2 {
 }
   
   iframe {
-    width: 600px;
-    height: 650px;
+    width: 500px;
+    height: 550px;
   }
 
   body {
@@ -32,6 +44,29 @@ h2 {
 }
 
 .chart-container {
-  width: 25%;
+  width: 30%;
   margin: 20px;
+}
+
+.map-chart {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#fluide, #dense, #sature, #bloque, #manquant {
+  font-size: 2em;
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.smiley {
+  font-size: 150px;
+}
+
+.smiley:hover {
+  opacity: 150px;
+  opacity: 0.82;
 }
