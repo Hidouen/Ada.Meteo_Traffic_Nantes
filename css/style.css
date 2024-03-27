@@ -75,14 +75,14 @@ h1 {
 }
 
 .smiley {
-  font-size: 150px;
+  font-size: 200px;
   opacity: 0.85;
   text-align: center;
   transition: transform 0.3s ease;
 }
 
 .smiley:hover {
-  transform: scale(1.5);
+  transform: scale(1.7);
   opacity: 1;
 }
 
@@ -118,9 +118,9 @@ footer {
 }
 
 .f1 {
-  font-size: 1.5em;
+  font-size: 1.8em;
 }
 
 .f2 {
-  font-size: 2.8em;
+  font-size: 2.88em;
 }
