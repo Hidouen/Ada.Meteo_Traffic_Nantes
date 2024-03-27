@@ -1,3 +1,5 @@
+let dataFromApi = []; // stock data from API
+
 let dataCount = { // stock data from our calculations
     fluide : 0,
     dense : 0,
@@ -8,10 +10,18 @@ let dataCount = { // stock data from our calculations
     denseDistance : 0,
     saturatedDistance : 0,
     blockedDistance : 0,
-    manquantDistance : 0
+    manquantDistance : 0,
+    totalDistance : 0,
+    totalConnu : 0
 };
 
-let dataFromApi = []; // stock data from API
+let stats = { // stock stats about each category
+    fluide : 0,
+    dense : 0,
+    saturated : 0,
+    blocked : 0,
+    manquant : 0
+}
 
 /*
 ** GET data from API and calculate
@@ -44,8 +54,34 @@ async function getData(count) {
             }
         }
     } catch (error) {
-        console.log("pas de donnees pour le moment");
+        console.log("pas de donnees pour le moment, veuillez retenter votre chance ulterieurement");
     }
+}
+
+// let trou;
+
+function toggleText(elemId) {
+    let text = document.getElementById(elemId);
+    if (text.style.display === "none") {
+      text.style.display = "block";
+    //   trou = document.getElementById("car");
+    //   trou.style.opacity = 0.50;
+    } else {
+      text.style.display = "none";
+    }
+}
+
+/*
+** Create statistics with our datasets
+*/
+function createStats(e) {
+    e.totalDistance = e.fluideDistance + e.denseDistance + e.saturatedDistance + e.blockedDistance + e.manquantDistance;
+    e.totalConnu = e.fluideDistance + e.denseDistance + e.saturatedDistance + e.blockedDistance;
+    stats.fluide = Math.trunc((e.fluideDistance / e.totalConnu) * 100);
+    stats.dense = Math.trunc((e.denseDistance / e.totalConnu) * 100);
+    stats.saturated = Math.trunc((e.saturatedDistance / e.totalConnu) * 100);
+    stats.blocked = Math.trunc((e.blockedDistance / e.totalConnu) * 100);
+    stats.manquant = Math.trunc((e.manquantDistance / e.totalDistance) * 100);
 }
 
 /*
@@ -80,45 +116,32 @@ function drawData() {
             }]
         }
     })
+    document.getElementById("smileyFluide").addEventListener("click", function() {
+        toggleText("fluide")
+    });
+    document.getElementById("smileyDense").addEventListener("click", function() {
+        toggleText("dense")
+    });
+    document.getElementById("smileySature").addEventListener("click", function() {
+        toggleText("sature")
+    });
+    document.getElementById("smileyBloque").addEventListener("click", function() {
+        toggleText("bloque")
+    });
+    document.getElementById("smileyManquant").addEventListener("click", function() {
+        toggleText("manquant")
+    });
 }
 
 /*
 ** Main function to manage operations
 */
-async function manageData() {
+async function dataHandler() {
     for (let i = 0; i < 844; i += 100) { // API allows 100 lines max per request
         await getData(i);
     }
+    createStats(dataCount);
     drawData();
 }
 
-manageData(); // launch operations
-
-// let trou;
-
-function toggleText(elemId) {
-    var text = document.getElementById(elemId);
-    if (text.style.display === "none") {
-      text.style.display = "block";
-    //   trou = document.getElementById("car");
-    //   trou.style.opacity = 0.50;
-    } else {
-      text.style.display = "none";
-    }
-  }
-
-  document.getElementById("smileyFluide").addEventListener("click", function() {
-    toggleText("fluide")
-  });
-  document.getElementById("smileyDense").addEventListener("click", function() {
-    toggleText("dense")
-  });
-  document.getElementById("smileySature").addEventListener("click", function() {
-    toggleText("sature")
-  });
-  document.getElementById("smileyBloque").addEventListener("click", function() {
-    toggleText("bloque")
-  });
-  document.getElementById("smileyManquant").addEventListener("click", function() {
-    toggleText("manquant")
-  });
+dataHandler(); // launch operations
