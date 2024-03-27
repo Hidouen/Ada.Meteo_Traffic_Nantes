@@ -54,7 +54,7 @@ async function getData(count) {
             }
         }
     } catch (error) {
-        console.log("pas de donnees pour le moment, veuillez retenter votre chance ulterieurement");
+        console.log("pas de données pour le moment, veuillez retenter votre chance ulterieurement");
     }
 }
 
@@ -91,24 +91,24 @@ function drawText() {
         document.getElementById("dense").innerText = dataCount.dense + ` routes denses\n(soit environ ${Math.round(dataCount.denseDistance / 1000)}km)`;
     }
     if (dataCount.saturated === 0) {
-        document.getElementById("sature").innerText = "aucune route saturee";
+        document.getElementById("sature").innerText = "aucune route saturée";
     } else if (dataCount.saturated === 1) {
-        document.getElementById("sature").innerText = "Une seule route saturee";
+        document.getElementById("sature").innerText = "Une seule route saturée";
     } else if (dataCount.saturated > 1) {
-        document.getElementById("sature").innerText = dataCount.saturated + ` routes saturees\n(soit environ ${Math.round(dataCount.saturatedDistance / 1000)}km)`;
+        document.getElementById("sature").innerText = dataCount.saturated + ` routes saturées\n(soit environ ${Math.round(dataCount.saturatedDistance / 1000)}km)`;
     }
     if (dataCount.blocked === 0) {
-        document.getElementById("bloque").innerText = "aucune route bloquee";
-    } else if (dataCount.saturated === 1) {
-        document.getElementById("bloque").innerText = "Une seule route bloquee";
-    } else if (dataCount.saturated > 1) {
-        document.getElementById("bloque").innerText = dataCount.blocked + ` routes bloquees\n(soit environ ${Math.round(dataCount.blockedDistance / 1000)}km)`;
+        document.getElementById("bloque").innerText = "aucune route bloquée";
+    } else if (dataCount.blocked === 1) {
+        document.getElementById("bloque").innerText = "Une seule route bloquée";
+    } else if (dataCount.blocked > 1) {
+        document.getElementById("bloque").innerText = dataCount.blocked + ` routes bloquées\n(soit environ ${Math.round(dataCount.blockedDistance / 1000)}km)`;
     }
     if (dataCount.manquant === 0) {
         document.getElementById("manquant").innerText = "aucune route sans retour d'information";
-    } else if (dataCount.saturated === 1) {
+    } else if (dataCount.manquant === 1) {
         document.getElementById("manquant").innerText = "Une seule route sans retour d'information";
-    } else if (dataCount.saturated > 1) {
+    } else if (dataCount.manquant > 1) {
         document.getElementById("manquant").innerText = dataCount.manquant + ` routes sans retour d'informations\n(soit environ ${Math.round(dataCount.manquantDistance / 1000)}km)`;
     }
 }

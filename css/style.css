@@ -1,7 +1,7 @@
 main {
   position: relative;
   z-index: 2;
-  margin-top: 120px;
+  margin-top: 150px;
   text-align: center;
 }
 
@@ -22,10 +22,8 @@ h1 {
   font-size: 4em;
   letter-spacing: 2px;
   line-height: 1.5;
-  /* position: fixed; */
   top: 0;
   width: 100%;
-  /* background-color: rgb(233, 188, 188); */
   background-image: url(../images/elephant.jpg);
   background-size: cover;
   z-index: 3;
