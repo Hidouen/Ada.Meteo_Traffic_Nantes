@@ -58,19 +58,6 @@ async function getData(count) {
     }
 }
 
-// let trou;
-
-function toggleText(elemId) {
-    let text = document.getElementById(elemId);
-    if (text.style.display === "none") {
-      text.style.display = "block";
-    //   trou = document.getElementById("car");
-    //   trou.style.opacity = 0.50;
-    } else {
-      text.style.display = "none";
-    }
-}
-
 /*
 ** Create statistics with our datasets
 */
@@ -84,38 +71,82 @@ function createStats(e) {
     stats.manquant = Math.trunc((e.manquantDistance / e.totalDistance) * 100);
 }
 
-/*
-** Put our calculated data in HTML
-*/
-function drawData() {
-    if (dataCount.fluide > 0) {
-        document.getElementById("fluide").innerText = dataCount.fluide + " routes fluide(s)";
-    }
-    if (dataCount.dense > 0) {
-        document.getElementById("dense").innerText = dataCount.dense + " route(s) dense(s)";
-    }
-    if (dataCount.saturated > 0) {
-        document.getElementById("sature").innerText = dataCount.saturated + " route(s) sature(s)";
-    }
-    if (dataCount.blocked > 0) {
-        document.getElementById("bloque").innerText = dataCount.blocked + " route(s) bloque(s)";
-    }
-    if (dataCount.manquant > 0) {
-        document.getElementById("manquant").innerText = dataCount.manquant + " routes sans retour d'informations";
-    }
-    
-    const pieCanvas = document.getElementById("pieCanvas")
 
+/*
+** draw all messages attached to emojis
+*/
+function drawText() {
+    if (dataCount.fluide === 0) {
+        document.getElementById("fluide").innerText = "aucune route fluide";
+    } else if (dataCount.fluide === 1) {
+        document.getElementById("fluide").innerText = "Une seule route fluide";
+    } else if (dataCount.fluide > 1) {
+        document.getElementById("fluide").innerText = dataCount.fluide + ` routes fluides\n(soit environ ${Math.round(dataCount.fluideDistance / 1000)}km)`;
+    }
+    if (dataCount.dense === 0) {
+        document.getElementById("dense").innerText = "aucune route dense";
+    } else if (dataCount.dense === 1) {
+        document.getElementById("dense").innerText = "Une seule route dense";
+    } else if (dataCount.dense > 1) {
+        document.getElementById("dense").innerText = dataCount.dense + ` routes denses\n(soit environ ${Math.round(dataCount.denseDistance / 1000)}km)`;
+    }
+    if (dataCount.saturated === 0) {
+        document.getElementById("sature").innerText = "aucune route saturee";
+    } else if (dataCount.saturated === 1) {
+        document.getElementById("sature").innerText = "Une seule route saturee";
+    } else if (dataCount.saturated > 1) {
+        document.getElementById("sature").innerText = dataCount.saturated + ` routes saturees\n(soit environ ${Math.round(dataCount.saturatedDistance / 1000)}km)`;
+    }
+    if (dataCount.blocked === 0) {
+        document.getElementById("bloque").innerText = "aucune route bloquee";
+    } else if (dataCount.saturated === 1) {
+        document.getElementById("bloque").innerText = "Une seule route bloquee";
+    } else if (dataCount.saturated > 1) {
+        document.getElementById("bloque").innerText = dataCount.blocked + ` routes bloquees\n(soit environ ${Math.round(dataCount.blockedDistance / 1000)}km)`;
+    }
+    if (dataCount.manquant === 0) {
+        document.getElementById("manquant").innerText = "aucune route sans retour d'information";
+    } else if (dataCount.saturated === 1) {
+        document.getElementById("manquant").innerText = "Une seule route sans retour d'information";
+    } else if (dataCount.saturated > 1) {
+        document.getElementById("manquant").innerText = dataCount.manquant + ` routes sans retour d'informations\n(soit environ ${Math.round(dataCount.manquantDistance / 1000)}km)`;
+    }
+}
+
+/*
+** Draw our fantastic graph
+*/
+function drawGraph() {
+    const pieCanvas = document.getElementById("pieCanvas")
+    
     const pieChart = new Chart (pieCanvas, {
-    type: "pie",
-    data: {
-        labels: ["Fluide", "Dense", "Saturé", "Bloqué", "Indéfini"],
-        datasets: [{
-            data: [dataCount.fluideDistance, dataCount.denseDistance, dataCount.saturatedDistance, dataCount.blockedDistance, dataCount.manquantDistance],
-            backgroundColor: ["rgb(85, 235, 98)", "yellow", "orange", "red", "grey"]
+        type: "pie",
+        data: {
+            labels: ["Fluide", "Dense", "Saturé", "Bloqué", "Indéfini"],
+            datasets: [{
+                data: [dataCount.fluideDistance, dataCount.denseDistance, dataCount.saturatedDistance, dataCount.blockedDistance, dataCount.manquantDistance],
+                backgroundColor: ["rgb(85, 235, 98)", "yellow", "orange", "red", "grey"]
             }]
         }
     })
+}
+
+/*
+** Make a text visible on click if it wasn't or the contrary 
+*/
+function toggleText(elemId) {
+    let text = document.getElementById(elemId);
+    if (text.style.display === "none") {
+      text.style.display = "block";
+    } else {
+      text.style.display = "none";
+    }
+}
+
+/*
+** Link our js and html about clicks during navigation
+*/
+function listenClicks() {
     document.getElementById("smileyFluide").addEventListener("click", function() {
         toggleText("fluide")
     });
@@ -131,6 +162,15 @@ function drawData() {
     document.getElementById("smileyManquant").addEventListener("click", function() {
         toggleText("manquant")
     });
+}
+
+/*
+** Put our calculated data in our page
+*/
+function drawData() {
+    drawText();
+    drawGraph();
+    listenClicks();
 }
 
 /*
