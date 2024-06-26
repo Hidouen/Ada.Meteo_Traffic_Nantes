@@ -16,3 +16,13 @@ A small website to [visualize](https://www.chartjs.org/) traffic conditions in t
 You can now enjoy it !
 
 Let me know if you have any feedback or suggestion.    
+
+### How ?
+[Marine](https://github.com/Marine-Dlf), [Romain](https://github.com/Rom3007) and I carried out this project at Ada Tech School in a 2-week sprint using [Agile methodology](https://www.atlassian.com/agile) :
+
+* Daily
+* A [Kanban board](https://www.atlassian.com/agile/kanban/boards) to feed the backlog, cut out tasks and distribute them to each other
+* Some features implemented using [mob or pair programming](https://medium.com/bgl-tech/mobbing-vs-pair-programming-3eb1e387183d)
+* [MVP](https://www.atlassian.com/agile/product-management/minimum-viable-product) and short iterations
+* [Demo](https://www.atlassian.com/agile/project-management/sprint-demo)
+* [Retro](https://www.atlassian.com/team-playbook/plays/retrospective)
